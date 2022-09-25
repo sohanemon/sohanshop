@@ -10,6 +10,7 @@ const CategoriesContext = createContext();
 function App() {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(0);
   useEffect(() => {
     fetch("https://api.escuelajs.co/api/v1/products")
       .then((res) => res.json())
@@ -21,7 +22,9 @@ function App() {
   }, []);
 
   return products.length && categories.length ? (
-    <CategoriesContext.Provider value={categories}>
+    <CategoriesContext.Provider
+      value={{ categories, selectedCategory, setSelectedCategory }}
+    >
       <ProductsContext.Provider value={products}>
         {/* only single value can be passed */}
         <div>

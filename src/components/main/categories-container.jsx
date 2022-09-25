@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { CategoriesContext } from "../../App";
 import { BiCategory } from "react-icons/bi";
 const CategoriesContainer = () => {
-  const categories = useContext(CategoriesContext);
+  const { categories, setSelectedCategory } = useContext(CategoriesContext);
   return (
     <div className=''>
       <div className='bg-white border rounded-lg py-2 my-4 border-blue-300'>
@@ -13,6 +13,7 @@ const CategoriesContainer = () => {
       </div>
       {categories.map((category) => (
         <p
+          onClick={() => setSelectedCategory(category.id)}
           key={category.id}
           className='py-2 cursor-pointer w-max font-medium tracking-wide leading-normal text-gray-900'
         >

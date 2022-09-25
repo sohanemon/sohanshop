@@ -1,14 +1,34 @@
-import { useContext, useState } from "react";
-import { ProductsContext } from "../../App";
+import { useContext, useEffect, useState } from "react";
+import { CategoriesContext, ProductsContext } from "../../App";
 import { AiFillStar } from "react-icons/ai";
+import Spinner2 from "../others/spinner2";
 import { MdOutlineFavoriteBorder } from "react-icons/md";
 const CardContainer = () => {
+  const { selectedCategory } = useContext(CategoriesContext);
+  const [categorizedProduct, setCategorizedProduct] = useState([]);
+  useEffect(() => {
+    fetch(
+      `https://api.escuelajs.co/api/v1/categories/${selectedCategory}/products`
+    )
+      .then((res) => res.json())
+      .then((data) => setCategorizedProduct(data));
+
+    return () => {};
+  }, [selectedCategory]);
+
   const products = useContext(ProductsContext);
+
   return (
     <div className='grid grid-cols-4 col-span-4 gap-4 tracking-wide leading-normal'>
-      {products.slice(0, 12).map((product) => (
-        <Card {...product} key={product.id} />
-      ))}
+      {!selectedCategory &&
+        products
+          .slice(0, 12)
+          .map((product) => <Card {...product} key={product.id} />)}{" "}
+      {!categorizedProduct && <Spinner2 data={categorizedProduct} />}
+      {selectedCategory &&
+        categorizedProduct
+          .slice(0, 12)
+          .map((product) => <Card {...product} key={product.id} />)}
     </div>
   );
 };
