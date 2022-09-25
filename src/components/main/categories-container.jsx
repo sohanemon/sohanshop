@@ -2,7 +2,8 @@ import { useContext } from "react";
 import { CategoriesContext } from "../../App";
 import { BiCategory } from "react-icons/bi";
 const CategoriesContainer = () => {
-  const { categories, setSelectedCategory } = useContext(CategoriesContext);
+  const { categories, setSelectedCategory, selectedCategory } =
+    useContext(CategoriesContext);
   return (
     <div className=''>
       <div className='bg-white border rounded-lg py-2 my-4 border-blue-300'>
@@ -15,7 +16,11 @@ const CategoriesContainer = () => {
         <p
           onClick={() => setSelectedCategory(category.id)}
           key={category.id}
-          className='py-2 cursor-pointer w-max font-medium tracking-wide leading-normal text-gray-900'
+          className={`${
+            category.id === selectedCategory
+              ? "text-blue-800 font-extrabold "
+              : "text-gray-900"
+          } py-2 cursor-pointer w-max font-medium tracking-wider leading-normal `}
         >
           {category.name}
         </p>
