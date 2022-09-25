@@ -36,7 +36,7 @@ function Left({}) {
         </a>
       </div>
       <a href='/' className=''>
-        Sell on Shopka
+        Sell on Shop
       </a>
       <a href='/' className=''>
         Register

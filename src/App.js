@@ -3,6 +3,7 @@ import Categories from "./components/header/categories";
 import Header from "./components/header/header";
 import CardContainer from "./components/main/card-container";
 import CategoriesContainer from "./components/main/categories-container";
+import Spinner from "./components/others/spinner";
 const ProductsContext = createContext();
 const CategoriesContext = createContext();
 function App() {
@@ -32,7 +33,9 @@ function App() {
         </div>
       </ProductsContext.Provider>
     </CategoriesContext.Provider>
-  ) : null;
+  ) : (
+    <Spinner />
+  );
 }
 export { ProductsContext, CategoriesContext };
 export default App;
