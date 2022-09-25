@@ -22,7 +22,7 @@ const Header = () => {
 
 export default Header;
 
-function Left({}) {
+function Left() {
   return (
     <div className='flex items-center gap-4 '>
       <div className='inline-flex space-x-3 items-center justify-end'>
@@ -45,7 +45,7 @@ function Left({}) {
   );
 }
 
-function Right({}) {
+function Right() {
   const buttonStyle =
     "bg-gray-100 rounded shadow text-blue-700 px-3 py-1 ring ring-1";
   return (
