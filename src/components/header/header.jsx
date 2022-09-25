@@ -31,7 +31,7 @@ function Left({}) {
             S
           </p>
         </div>
-        <a href='/' className='text-4xl font-medium leading-9 text-gray-800'>
+        <a href='/' className='text-2xl font-medium leading-9 text-gray-800'>
           SohanShop
         </a>
       </div>
