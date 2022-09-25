@@ -54,7 +54,7 @@ function Right() {
         Consumer Electronics
       </a>
       <div className='flex items-center gap-3'>
-        <button className={buttonStyle}>Sign in</button>
+        <button className={buttonStyle}>Wishlist</button>
         <button className={buttonStyle}>My Cart</button>
         <img
           className='w-10'

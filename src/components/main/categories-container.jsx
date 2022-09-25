@@ -6,9 +6,9 @@ const CategoriesContainer = () => {
   return (
     <div className=''>
       <div className='bg-white border rounded-lg py-2 my-4 border-blue-300'>
-        <p className='text-2xl font-semibold leading-9 justify-center gap-2 text-blue-700 flex items-center'>
+        <p className='text-xl font-semibold leading-9 justify-center gap-2 text-blue-700 flex items-center'>
           <BiCategory />
-          Departments
+          Categories
         </p>
       </div>
       {categories.map((category) => (
