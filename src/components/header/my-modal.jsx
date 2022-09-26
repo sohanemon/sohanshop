@@ -1,5 +1,5 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 
 export default function MyModal({ isOpen, setIsOpen }) {
   function closeModal() {

@@ -40,8 +40,9 @@ function Card({ id, images, title, price, description }) {
   const [loved, setLoved] = useState(false);
   useEffect(() => {
     updateLove();
+    console.log("first");
     return () => {};
-  }, []);
+  });
   const handleWishlist = () => {
     addToLS(id);
     updateLove();
