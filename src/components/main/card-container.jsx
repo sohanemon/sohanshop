@@ -40,7 +40,6 @@ function Card({ id, images, title, price, description }) {
   const [loved, setLoved] = useState(false);
   useEffect(() => {
     updateLove();
-    console.log("first");
     return () => {};
   });
   const handleWishlist = () => {
@@ -49,7 +48,7 @@ function Card({ id, images, title, price, description }) {
   };
   const updateLove = () => {
     const wishlist = JSON.parse(localStorage.getItem("wishlist"));
-    if (wishlist.loved.includes(id)) setLoved(true);
+    if (wishlist?.loved?.includes(id)) setLoved(true);
     else setLoved(false);
   };
   return (

@@ -1,11 +1,14 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 
-export default function MyModal({ isOpen, setIsOpen }) {
+import ModalFetch from "./modal-fetch";
+
+export default function MyModal({ isOpen, setIsOpen, lovedItems }) {
+  const [reload, setReload] = useState(true);
+  useEffect(() => {});
   function closeModal() {
     setIsOpen(false);
   }
-
   function openModal() {
     setIsOpen(true);
   }
@@ -13,7 +16,7 @@ export default function MyModal({ isOpen, setIsOpen }) {
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as='div' className='relative z-10' onClose={closeModal}>
+        <Dialog as='div' className='relative z-10 ' onClose={closeModal}>
           <Transition.Child
             as={Fragment}
             enter='ease-out duration-300'
@@ -37,18 +40,17 @@ export default function MyModal({ isOpen, setIsOpen }) {
                 leaveFrom='opacity-100 scale-100'
                 leaveTo='opacity-0 scale-95'
               >
-                <Dialog.Panel className='w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'>
+                <Dialog.Panel className='w-full max-w-3xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'>
                   <Dialog.Title
                     as='h3'
                     className='text-lg font-medium leading-6 text-gray-900'
                   >
-                    Payment successful
+                    Wishlist
                   </Dialog.Title>
                   <div className='mt-2'>
-                    <p className='text-sm text-gray-500'>
-                      Your payment has been successfully submitted. We’ve sent
-                      you an email with all of the details of your order.
-                    </p>
+                    {lovedItems?.map((el) => (
+                      <ModalFetch setReload={setReload} key={el} id={el} />
+                    ))}
                   </div>
 
                   <div className='mt-4'>
@@ -57,7 +59,7 @@ export default function MyModal({ isOpen, setIsOpen }) {
                       className='inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
                       onClick={closeModal}
                     >
-                      Got it, thanks!
+                      Close!
                     </button>
                   </div>
                 </Dialog.Panel>

@@ -15,4 +15,9 @@ const addToLS = (id) => {
   localStorage.setItem("wishlist", JSON.stringify(currentStorage));
   return loved;
 };
-export { addToLS };
+
+const getLoved = () => {
+  const data = JSON.parse(localStorage.getItem("wishlist"));
+  return data?.loved;
+};
+export { getLoved, addToLS };

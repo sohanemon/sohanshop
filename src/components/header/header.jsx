@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
+import { getLoved } from "../../util/add-to-ls";
 import MyModal from "./my-modal";
 const Header = () => {
   let [isOpen, setIsOpen] = useState(false);
+  const [lovedItems, setLovedItems] = useState([]);
   return (
     <div className='w-full mx-auto'>
       <div className='text-lg text-gray-600 flex items-center justify-evenly my-4 '>
@@ -17,8 +19,12 @@ const Header = () => {
           />
           <MdCancel />
         </div>
-        <Right setIsOpen={setIsOpen} />
-        <MyModal isOpen={isOpen} setIsOpen={setIsOpen} />
+        <Right setIsOpen={setIsOpen} setLovedItems={setLovedItems} />
+        <MyModal
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          lovedItems={lovedItems}
+        />
       </div>
     </div>
   );
@@ -49,7 +55,11 @@ function Left() {
   );
 }
 
-function Right({ setIsOpen }) {
+function Right({ setIsOpen, setLovedItems }) {
+  const handleWishlist = () => {
+    setLovedItems(getLoved());
+    setIsOpen(true);
+  };
   const buttonStyle =
     "bg-gray-100 rounded shadow text-blue-700 px-3 py-1 ring ring-1";
   return (
@@ -58,7 +68,7 @@ function Right({ setIsOpen }) {
         Consumer Electronics
       </a>
       <div className='flex items-center gap-3'>
-        <button onClick={() => setIsOpen(true)} className={buttonStyle}>
+        <button onClick={handleWishlist} className={buttonStyle}>
           Wishlist
         </button>
         <button className={buttonStyle}>My Cart</button>
