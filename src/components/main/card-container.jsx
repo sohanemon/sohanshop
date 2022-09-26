@@ -3,6 +3,7 @@ import { CategoriesContext, ProductsContext } from "../../App";
 import { AiFillStar } from "react-icons/ai";
 import Spinner2 from "../others/spinner2";
 import { MdOutlineFavoriteBorder } from "react-icons/md";
+import { addToLS } from "../../util/add-to-ls";
 const CardContainer = () => {
   const { selectedCategory } = useContext(CategoriesContext);
   const [categorizedProduct, setCategorizedProduct] = useState([]);
@@ -35,10 +36,20 @@ const CardContainer = () => {
 
 export default CardContainer;
 
-function Card({ images, title, price, description }) {
-  const [love, setLove] = useState(false);
-  const handleLove = () => {
-    setLove((c) => !c);
+function Card({ id, images, title, price, description }) {
+  const [loved, setLoved] = useState(false);
+  useEffect(() => {
+    updateLove();
+    return () => {};
+  }, []);
+  const handleWishlist = () => {
+    addToLS(id);
+    updateLove();
+  };
+  const updateLove = () => {
+    const wishlist = JSON.parse(localStorage.getItem("wishlist"));
+    if (wishlist.loved.includes(id)) setLoved(true);
+    else setLoved(false);
   };
   return (
     <div className='p-4  rounded '>
@@ -65,9 +76,9 @@ function Card({ images, title, price, description }) {
             </p>
           </div>
           <button
-            onClick={handleLove}
+            onClick={() => handleWishlist()}
             className={`flex items-center border rounded hover:border-rose-300 hover:text-rose-600  px-3 py-1 gap-1  ${
-              love
+              loved
                 ? "border-rose-300 text-rose-600 "
                 : "text-blue-700 border-blue-300"
             }`}

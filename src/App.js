@@ -1,6 +1,5 @@
 import { createContext, useEffect, useState } from "react";
 import Categories from "./components/header/categories";
-
 import Header from "./components/header/header";
 import CardContainer from "./components/main/card-container";
 import CategoriesContainer from "./components/main/categories-container";

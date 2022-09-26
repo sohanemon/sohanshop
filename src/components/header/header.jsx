@@ -1,6 +1,9 @@
+import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
+import MyModal from "./my-modal";
 const Header = () => {
+  let [isOpen, setIsOpen] = useState(false);
   return (
     <div className='w-full mx-auto'>
       <div className='text-lg text-gray-600 flex items-center justify-evenly my-4 '>
@@ -14,7 +17,8 @@ const Header = () => {
           />
           <MdCancel />
         </div>
-        <Right />
+        <Right setIsOpen={setIsOpen} />
+        <MyModal isOpen={isOpen} setIsOpen={setIsOpen} />
       </div>
     </div>
   );
@@ -45,7 +49,7 @@ function Left() {
   );
 }
 
-function Right() {
+function Right({ setIsOpen }) {
   const buttonStyle =
     "bg-gray-100 rounded shadow text-blue-700 px-3 py-1 ring ring-1";
   return (
@@ -54,7 +58,9 @@ function Right() {
         Consumer Electronics
       </a>
       <div className='flex items-center gap-3'>
-        <button className={buttonStyle}>Wishlist</button>
+        <button onClick={() => setIsOpen(true)} className={buttonStyle}>
+          Wishlist
+        </button>
         <button className={buttonStyle}>My Cart</button>
         <img
           className='w-10'
