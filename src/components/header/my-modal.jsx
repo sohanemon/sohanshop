@@ -1,16 +1,20 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useState } from "react";
+import { getLoved } from "../../util/add-to-ls";
 
 import ModalFetch from "./modal-fetch";
 
-export default function MyModal({ isOpen, setIsOpen, lovedItems }) {
-  const [reload, setReload] = useState(true);
-  useEffect(() => {});
+export default function MyModal({ isOpen, setIsOpen }) {
+  const [lovedItems, setLovedItems] = useState([]);
+  const [reload, setReload] = useState(0);
+
+  useEffect(() => {
+    setLovedItems(getLoved());
+    return () => {};
+  }); //removing reloading from dependency may work properly
+
   function closeModal() {
     setIsOpen(false);
-  }
-  function openModal() {
-    setIsOpen(true);
   }
 
   return (
@@ -48,9 +52,11 @@ export default function MyModal({ isOpen, setIsOpen, lovedItems }) {
                     Wishlist
                   </Dialog.Title>
                   <div className='mt-2'>
-                    {lovedItems?.map((el) => (
-                      <ModalFetch setReload={setReload} key={el} id={el} />
-                    ))}
+                    {lovedItems?.length
+                      ? lovedItems?.map((el) => (
+                          <ModalFetch setReload={setReload} key={el} id={el} />
+                        ))
+                      : null}
                   </div>
 
                   <div className='mt-4'>

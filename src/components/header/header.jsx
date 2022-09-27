@@ -1,11 +1,9 @@
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
-import { getLoved } from "../../util/add-to-ls";
 import MyModal from "./my-modal";
 const Header = () => {
   let [isOpen, setIsOpen] = useState(false);
-  const [lovedItems, setLovedItems] = useState([]);
   return (
     <div className='w-full mx-auto'>
       <div className='text-lg text-gray-600 flex items-center justify-evenly my-4 '>
@@ -19,12 +17,8 @@ const Header = () => {
           />
           <MdCancel />
         </div>
-        <Right setIsOpen={setIsOpen} setLovedItems={setLovedItems} />
-        <MyModal
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
-          lovedItems={lovedItems}
-        />
+        <Right setIsOpen={setIsOpen} />
+        <MyModal firstLoad={1} isOpen={isOpen} setIsOpen={setIsOpen} />
       </div>
     </div>
   );
@@ -57,7 +51,6 @@ function Left() {
 
 function Right({ setIsOpen, setLovedItems }) {
   const handleWishlist = () => {
-    setLovedItems(getLoved());
     setIsOpen(true);
   };
   const buttonStyle =

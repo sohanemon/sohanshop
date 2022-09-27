@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { MdPlaylistAdd } from "react-icons/md";
 import { addToLS } from "../../util/add-to-ls";
-import removeFromLS from "../../util/remove-from-ls";
 
 const ModalFetch = ({ id, setReload }) => {
   const [item, setItem] = useState({});
@@ -13,9 +12,8 @@ const ModalFetch = ({ id, setReload }) => {
         setItem(data);
         setLoading(false);
       });
-    console.log(item);
     return () => {};
-  }, []);
+  });
 
   if (!loading)
     return (
@@ -37,7 +35,7 @@ const ModalFetch = ({ id, setReload }) => {
             <button
               onClick={() => {
                 addToLS(id);
-                setReload((p) => !p);
+                setReload((p) => p + 1);
               }}
               className='font-semibold hover:ring-1 active:scale-95 rounded-full px-3 ring-gray-600'
             >
@@ -51,7 +49,7 @@ const ModalFetch = ({ id, setReload }) => {
         </div>
       </div>
     );
-  else return <h1>Wait bruh</h1>;
+  else return <h1> ... </h1>;
 };
 
 export default ModalFetch;
